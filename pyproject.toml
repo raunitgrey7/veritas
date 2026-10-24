@@ -1,0 +1,64 @@
+[project]
+name = "veritas"
+version = "0.1.0"
+description = "Deterministic LLM evaluation, red-teaming and guardrail platform with measured detector quality"
+readme = "README.md"
+requires-python = ">=3.13"
+license = { text = "MIT" }
+authors = [{ name = "Raunit Kumar Thakur" }]
+dependencies = [
+    "fastapi>=0.162.0",
+    "pydantic>=2.14.1",
+    "pydantic-settings>=2.16.1",
+    "uvicorn[standard]>=0.54.0",
+]
+
+[project.scripts]
+veritas = "veritas.cli:main"
+
+[project.optional-dependencies]
+llm = [
+    "anthropic>=2.3.0",
+]
+
+[build-system]
+requires = ["uv_build>=0.13.5,<0.14.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.1",
+    "hypothesis>=6.170.9",
+    "pytest>=9.1.1",
+    "pytest-cov>=7.1.0",
+    "ruff>=0.17.2",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+src = ["src", "tests", "scripts"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "N", "ANN", "RUF", "C90"]
+# RUF001/2/3 flag confusable unicode characters. veritas deliberately embeds
+# homoglyphs and zero-width characters: they are the attacks it detects, so these
+# rules do not apply to this codebase.
+ignore = ["ANN401", "RUF012", "RUF001", "RUF002", "RUF003"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["ANN"]
+# The pattern detector is a table of regular expressions; the literals cannot be
+# wrapped without harming readability, so the line-length rule is relaxed here.
+"src/veritas/detectors/patterns.py" = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q -p no:cacheprovider"
+filterwarnings = ["error::DeprecationWarning:veritas.*"]
+
+[tool.coverage.run]
+source = ["veritas"]
