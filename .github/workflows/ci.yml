@@ -1,0 +1,49 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: "0.13.5"
+
+      - name: Sync dependencies
+        run: uv sync --all-extras --frozen
+
+      - name: Lint
+        run: uv run ruff check src tests
+
+      - name: Tests
+        run: uv run pytest -q
+
+      - name: Benchmark
+        run: uv run python -m veritas.benchmark
+
+      - name: Regression gate
+        # Fails the build if attack success rate regresses past the baseline or
+        # breaches the absolute thresholds defined in veritas.gate.
+        run: uv run python -m veritas.gate
+
+      - name: Render HTML report
+        run: uv run python -m veritas.report
+
+      - name: Upload benchmark artefacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: benchmark-results
+          path: |
+            benchmarks/results.json
+            benchmarks/results.md
+            benchmarks/report.html

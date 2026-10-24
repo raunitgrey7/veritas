@@ -1,0 +1,19 @@
+# Single-service compose for local runs. The API is the only long-running
+# service; the benchmark and gate are one-shot commands run through the Makefile
+# or the CLI. Set APP_API_KEY to require an x-api-key header on the scan routes.
+
+services:
+  api:
+    build: .
+    image: veritas:local
+    ports:
+      - "8000:8000"
+    environment:
+      APP_API_KEY: ${APP_API_KEY:-}
+      APP_LOG_LEVEL: ${APP_LOG_LEVEL:-INFO}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/health').status==200 else 1)"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+    restart: unless-stopped

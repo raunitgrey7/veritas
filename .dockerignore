@@ -1,0 +1,14 @@
+.git
+.venv
+.pytest_cache
+.ruff_cache
+.hypothesis
+.coverage
+htmlcov
+__pycache__
+*.pyc
+benchmarks/report.html
+docs
+tests
+*.log
+.DS_Store
