@@ -10,6 +10,8 @@ when safety regresses. The whole core runs offline with no API key: every number
 below was produced by a command in this repository and is reproducible from a
 fixed seed.
 
+![The veritas dashboard: prompt scanner, corpus coverage by attack family and the latest benchmark](docs/dashboard.png)
+
 ## What it does
 
 1. Generates an attack corpus of 478 cases across 16 families (prompt injection,
