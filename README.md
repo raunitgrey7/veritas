@@ -77,7 +77,7 @@ methodology and metric definitions.
 ```bash
 make setup     # uv sync --all-extras: create .venv and install everything
 make lint      # ruff check src tests
-make test      # pytest: 180 tests
+make test      # pytest: 181 tests
 make bench     # build corpus, evaluate, write benchmarks/results.json and results.md
 make serve     # serve the API and dashboard on http://127.0.0.1:8000
 ```

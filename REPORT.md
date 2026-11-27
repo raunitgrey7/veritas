@@ -68,7 +68,7 @@ A deterministic LLM evaluation, red-teaming and guardrail platform:
 
 ### Test count (`make test`)
 
-- 180 tests pass. 165 test functions, 15 of which come from one parametrization
+- 181 tests pass. 166 test functions, 15 of which come from one parametrization
   over the 16 attack families. The suite includes property-based tests
   (`tests/test_property.py`), adversarial and robustness tests
   (`tests/test_adversarial.py`) and determinism tests (`tests/test_determinism.py`).
@@ -85,10 +85,10 @@ All checks passed!
 `make test`:
 
 ```
-........................................................................ [ 40%]
-........................................................................ [ 80%]
-....................................                                     [100%]
-180 passed in 17.53s
+........................................................................ [ 39%]
+........................................................................ [ 79%]
+.....................................                                    [100%]
+181 passed in 12.88s
 ```
 
 `make bench`:

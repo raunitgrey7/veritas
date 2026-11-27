@@ -113,3 +113,12 @@ def test_metrics_registry_renders_counter():
     reg.inc("veritas_test_total", {"a": "b"})
     text = reg.render()
     assert 'veritas_test_total{a="b"} 1.0' in text
+
+
+def test_coverage_bar_fill_is_a_block_so_its_width_applies(client):
+    """The bars are spans; an inline span ignores width and height, which drew every bar empty."""
+    css = client.get("/static/style.css")
+    assert css.status_code == 200
+    rule = next(line for line in css.text.splitlines() if line.startswith(".bar-fill"))
+    assert "display: block" in rule
+    assert 'class="bar-fill" style="width:' in client.get("/static/app.js").text

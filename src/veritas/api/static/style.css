@@ -99,7 +99,7 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
 .bars { display: grid; gap: 0.35rem; }
 .bar-row { display: grid; grid-template-columns: 11rem 1fr 2.5rem; align-items: center; gap: 0.5rem; font-size: 0.85rem; }
 .bar-track { background: var(--bg); border: 1px solid var(--line); border-radius: 0.3rem; overflow: hidden; height: 0.9rem; }
-.bar-fill { background: var(--bar); height: 100%; }
+.bar-fill { display: block; background: var(--bar); height: 100%; }
 .bar-label { color: var(--muted); }
 .bar-value { text-align: right; font-variant-numeric: tabular-nums; }
 
