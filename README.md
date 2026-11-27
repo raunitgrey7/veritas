@@ -1,5 +1,8 @@
 # veritas
 
+[![ci](https://github.com/raunitgrey7/veritas/actions/workflows/ci.yml/badge.svg)](https://github.com/raunitgrey7/veritas/actions/workflows/ci.yml)
+[![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 LLM evaluation, red-teaming and guardrail platform. veritas builds a structured
 corpus of adversarial prompts, measures how well a set of deterministic guardrails
 catch them, evaluates any model under test for attack success rate, and gates CI

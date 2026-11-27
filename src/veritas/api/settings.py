@@ -1,7 +1,7 @@
 """Runtime settings for the API, read from the environment.
 
 Everything has a safe default so the service starts with no configuration. Auth
-is off until ``APP_API_KEY`` is set, which matches the charter: the core works
+is off until ``APP_API_KEY`` is set, by design: the core works
 with no secrets, and protection is opt-in.
 """
 
